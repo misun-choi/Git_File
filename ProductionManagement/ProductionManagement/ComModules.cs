@@ -1,0 +1,53 @@
+﻿using System;
+using System.Windows.Forms;
+using System.Drawing;
+
+namespace ProductionManagement
+{
+    class ComModules
+    {
+        #region 행 배경색 설정하기 - SetRowBackgroundColor(listView, oddRowColor, evenRowColor)
+
+        /// <summary>
+        /// 숫자를 문자로 받아 셋째 자리마다 숫자를 찍어 문자로 리턴
+        /// </summary>
+        /// <param name="szData">숫자</param>
+        public string ToComma(string szData)
+        {
+            string szReturn = string.Empty;
+            if (szData != "")
+            {
+                string szValue = szData.Replace(",", "");
+                Double data = Double.Parse(szValue);
+                szReturn = string.Format("{0:###,###,###,###,###,###}", data);
+
+            }
+            return szReturn;
+        }
+        #endregion
+
+        #region 행 배경색 설정하기 - SetRowBackgroundColor(listView, oddRowColor, evenRowColor)
+
+        /// <summary>
+        /// 행 배경색 설정하기
+        /// </summary>
+        /// <param name="listView">ListView 객체</param>
+        /// <param name="oddRowColor">홀수 행 색상</param>
+        /// <param name="evenRowColor">짝수 행 색상</param>
+        public void SetRowBackgroundColor(ListView listView, Color oddRowColor, Color evenRowColor)
+        {
+            foreach (ListViewItem listViewItem in listView.Items)
+            {
+                if ((listViewItem.Index % 2) == 0)
+                {
+                    listViewItem.BackColor = evenRowColor;
+                }
+                else
+                {
+                    listViewItem.BackColor = oddRowColor;
+                }
+            }
+            #endregion
+        }
+    }
+}
