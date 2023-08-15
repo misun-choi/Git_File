@@ -4,9 +4,9 @@ using System.Drawing;
 
 namespace ProductionManagement
 {
-    class ComModules
+    public class ComModules
     {
-        #region 행 배경색 설정하기 - SetRowBackgroundColor(listView, oddRowColor, evenRowColor)
+        #region 숫자를 문자로 받아 셋째 자리마다 숫자를 찍어 문자로 리턴 - ToComma(string szData)
 
         /// <summary>
         /// 숫자를 문자로 받아 셋째 자리마다 숫자를 찍어 문자로 리턴
@@ -34,20 +34,18 @@ namespace ProductionManagement
         /// <param name="listView">ListView 객체</param>
         /// <param name="oddRowColor">홀수 행 색상</param>
         /// <param name="evenRowColor">짝수 행 색상</param>
-        public void SetRowBackgroundColor(ListView listView, Color oddRowColor, Color evenRowColor)
+        public void SetAlternatingRowColors(ListView lst, Color color1, Color color2)
         {
-            foreach (ListViewItem listViewItem in listView.Items)
+
+            //loop through each ListViewItem in the ListView control
+            foreach (ListViewItem item in lst.Items)
             {
-                if ((listViewItem.Index % 2) == 0)
-                {
-                    listViewItem.BackColor = evenRowColor;
-                }
+                if ((item.Index % 2) == 0)
+                    item.BackColor = color1;
                 else
-                {
-                    listViewItem.BackColor = oddRowColor;
-                }
-            }
-            #endregion
+                    item.BackColor = color2;
+             }
         }
+        #endregion 
     }
 }

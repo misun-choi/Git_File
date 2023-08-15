@@ -171,12 +171,14 @@ namespace ProductionManagement
             this.columnHeader5,
             this.columnHeader6});
             this.lvList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvList.ForeColor = System.Drawing.SystemColors.WindowText;
             this.lvList.FullRowSelect = true;
             this.lvList.GridLines = true;
             this.lvList.HideSelection = false;
             this.lvList.Location = new System.Drawing.Point(3, 17);
             this.lvList.MultiSelect = false;
             this.lvList.Name = "lvList";
+            this.lvList.OwnerDraw = true;
             this.lvList.Size = new System.Drawing.Size(906, 355);
             this.lvList.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvList.TabIndex = 0;
@@ -184,6 +186,8 @@ namespace ProductionManagement
             this.lvList.View = System.Windows.Forms.View.Details;
             this.lvList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvList_ColumnClick);
             this.lvList.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lvList_DrawColumnHeader);
+            this.lvList.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lvList_DrawItem);
+            this.lvList.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lvList_DrawSubItem);
             this.lvList.SelectedIndexChanged += new System.EventHandler(this.lvList_SelectedIndexChanged);
             // 
             // columnHeader1
@@ -267,7 +271,6 @@ namespace ProductionManagement
             this.dtEdate.Size = new System.Drawing.Size(200, 22);
             this.dtEdate.TabIndex = 6;
             this.dtEdate.ValueChanged += new System.EventHandler(this.dtEdate_ValueChanged);
-            this.dtEdate.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dtEdate_MouseUp);
             // 
             // dtSdate
             // 

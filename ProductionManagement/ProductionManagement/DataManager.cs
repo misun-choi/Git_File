@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,7 +115,6 @@ namespace ProductionManagement
                     row.SubItems.Add(oracleDR["edate"].ToString());
 
                     lv.Items.Add(row);
-
                 }
                 oracleDR.Close();
             }
@@ -153,19 +153,12 @@ namespace ProductionManagement
             lv.Items.Clear();
             try
             {
-                string sSql = "select (select c.item_name from t_items c where a.item_code = c.item_code) item, " +
-                                 "        sum(b.qty) planQty, " +
-                                 "        sum(decode(b.edate,null,0,b.qty)) completeQty, " +
-                                 "        round(100 * (sum(decode(b.edate,null,0,b.qty)) / sum(b.qty)),3) progress " +
-                                 "  from (select distinct(t.item_code)  from T_PRODUCTIONS t) a, " +
-                                 "         T_PRODUCTIONS b " +
-                                 " where a.item_code = b.item_code " +
-                                 "group by a.item_code";
+                string sSql = "select (select c.item_name from t_items c where a.item_code = c.item_code) item, " + "        sum(b.qty) planQty, " + "        sum(decode(b.edate,null,0,b.qty)) completeQty, " + "        round(100 * (sum(decode(b.edate,null,0,b.qty)) / sum(b.qty)),3) progress " + "  from (select distinct(t.item_code)  from T_PRODUCTIONS t) a, " + "         T_PRODUCTIONS b " + " where a.item_code = b.item_code " + "group by a.item_code";
                 OracleDataReader oracleDR;
                 ListViewItem row;
                 OracleCommand oracleCmd = new OracleCommand(sSql, m_oracleConn);
                 oracleDR = oracleCmd.ExecuteReader();
-
+                                
                 while (oracleDR != null && oracleDR.Read())
                 {
                     row = new ListViewItem(oracleDR["item"].ToString());
@@ -173,8 +166,13 @@ namespace ProductionManagement
                     row.SubItems.Add(oracleDR["completeQty"].ToString());
                     string rate = string.Format("{0:0.000}", double.Parse(oracleDR["progress"].ToString()));
                     row.SubItems.Add(rate);
-
-                    lv.Items.Add(row);
+                   if (double.Parse(oracleDR["progress"].ToString()) < 50)     // 진척율이 50% 이하는 글씨색을 빨간색으로..
+                    {
+                        row.UseItemStyleForSubItems = false;
+                        row.SubItems[0].ForeColor = Color.Red;
+                        row.UseItemStyleForSubItems = true;
+                    }
+                    lv.Items.Add(row);                 
                 }
                 oracleDR.Close();
             }

@@ -29,6 +29,7 @@ namespace ProductionManagement
             ButtonEvent();
         }
         public DataManager GetDm() => dm;
+        public ComModules GetCm() => cm;
 
         private void InitGetData()
         {
@@ -55,6 +56,7 @@ namespace ProductionManagement
             dm.ProductionList(lvList, cbYear.Text + string.Format("{0:D2}", int.Parse(cbMonth.Text)));
         }
 
+        #region 버튼처리...
         private void ButtonEvent()
         {
             // 생산계획 조회 버튼 클릭시 처리,,,,
@@ -75,7 +77,7 @@ namespace ProductionManagement
                         dm.DataProcess(sSql);
                         dm.ProductionList(lvList, cbYear.Text + string.Format("{0:D2}", int.Parse(cbMonth.Text)));
                         statusStrip.Items[0].Text = "생산계획 삭제가 정상 처리 되었습니다.";
-                        timer.Start();
+                        timer.Start();                        
                     }
                 }
                 else
@@ -129,7 +131,7 @@ namespace ProductionManagement
                     dm.ProductionList(lvList, cbYear.Text + string.Format("{0:D2}", int.Parse(cbMonth.Text)));
                     statusStrip.Items[0].Text = "생산완료일이 정상 등록 되었습니다.";
                     timer.Start();
-                    //ScreenClear();
+                    
                 }
             };
 
@@ -141,6 +143,7 @@ namespace ProductionManagement
                 frmsum.ShowDialog();
             };
         }
+        #endregion 
 
         private bool InputChk()
         {
@@ -150,16 +153,7 @@ namespace ProductionManagement
                 cbItem.Focus();
                 return false;
             }
-            /*
-            if (nudQty.Value == 0)
-            {
-                if (MessageBox.Show("수량이 0 입니다. 맞습니까?", "알림", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                {
-                    nudQty.Focus();
-                    return false;
-                }
-            }
-            */
+ 
             if (cbWorkCenter.SelectedIndex < 0)
             {
                 MessageBox.Show("작업장이 선택되지 않았습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -228,34 +222,46 @@ namespace ProductionManagement
             txtQty.SelectionLength = 0;
          }
 
-        private void dtEdate_MouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
-
         private void lvList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            if (lvList.Sorting == SortOrder.Ascending)
-            {
-                lvList.Sorting = SortOrder.Descending;
-            }
-            else
-            {
-                lvList.Sorting = SortOrder.Ascending;
-            }
+            if (lvList.Sorting == SortOrder.Ascending)   lvList.Sorting = SortOrder.Descending;
+            else                                                   lvList.Sorting = SortOrder.Ascending;
 
             lvList.ListViewItemSorter = new Sorter();      // * 1
             Sorter s = (Sorter)lvList.ListViewItemSorter;
             s.Order = lvList.Sorting;
             s.Column = e.Column;
             lvList.Sort();
-
-
         }
 
         private void lvList_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
-            cm.SetRowBackgroundColor(lvList, Color.Red, Color.AliceBlue);
+            cm.SetAlternatingRowColors(lvList, Color.White, Color.Beige);
+            e.Graphics.FillRectangle(Brushes.Bisque, e.Bounds);
+            e.DrawText();
+        }
+
+        private void lvList_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            /*
+            if ((e.ItemState & ListViewItemStates.Focused) > 0)
+            {
+                e.Graphics.FillRectangle(SystemBrushes.ControlDarkDark,
+                e.Bounds);
+                e.Graphics.DrawString(e.Item.Text, lvList.Font,
+                SystemBrushes.HighlightText, e.Bounds);
+            }
+            else
+            {
+                e.DrawBackground();
+                e.DrawText();
+            }
+            */
+        }
+
+        private void lvList_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;           // lvList.OwnerDraw를 True를 했을때는 DrawSubItem에서 Text를 정의하지 않아도 됨. =>  기본 그리기 기능을 사용
         }
     }
 }

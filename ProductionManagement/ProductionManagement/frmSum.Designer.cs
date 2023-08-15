@@ -43,14 +43,18 @@ namespace ProductionManagement
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.lvList.FullRowSelect = true;
             this.lvList.GridLines = true;
             this.lvList.HideSelection = false;
             this.lvList.Location = new System.Drawing.Point(15, 14);
             this.lvList.Name = "lvList";
+            this.lvList.OwnerDraw = true;
             this.lvList.Size = new System.Drawing.Size(583, 367);
             this.lvList.TabIndex = 0;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
+            this.lvList.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lvList_DrawColumnHeader);
+            this.lvList.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lvList_DrawItem);
             // 
             // columnHeader1
             // 
