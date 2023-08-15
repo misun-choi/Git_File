@@ -1,0 +1,17 @@
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\bin\Debug\Wpf_ProductionManagement.exe.config
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\bin\Debug\Wpf_ProductionManagement.exe
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\bin\Debug\Wpf_ProductionManagement.pdb
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\Wpf_ProductionManagement.csproj.AssemblyReference.cache
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\MainWindow.g.cs
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\App.g.cs
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\Wpf_ProductionManagement_MarkupCompile.cache
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\Wpf_ProductionManagement_MarkupCompile.lref
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\MainWindow.baml
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\Wpf_ProductionManagement.g.resources
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\Wpf_ProductionManagement.Properties.Resources.resources
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\Wpf_ProductionManagement.csproj.GenerateResource.cache
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\Wpf_ProductionManagement.csproj.CoreCompileInputs.cache
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\Wpf_ProductionManagement.exe
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\Wpf_ProductionManagement.pdb
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\bin\Debug\Oracle.DataAccess.dll
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\Wpf_ProductionManagement\Wpf_ProductionManagement\obj\Debug\Wpf_ProductionManagement.csproj.CopyComplete

@@ -1,0 +1,58 @@
+﻿<Window x:Class="Wpf_ProductionManagement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_ProductionManagement"
+        mc:Ignorable="d"
+        Title="생산관리 시스템" Height="771.429" Width="1405.227">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="생산년도 : " HorizontalAlignment="Left" Margin="35,42,0,0" VerticalAlignment="Top" Width="110" FontSize="16" Height="37"/>
+        <ComboBox x:Name="cbYear" HorizontalAlignment="Left" Margin="132,42,0,0" VerticalAlignment="Top" Width="120" FontSize="16" Height="33"/>
+        <Label Content="생산월 : " HorizontalAlignment="Left" Margin="361,42,0,0" VerticalAlignment="Top" Width="86" FontSize="16" Height="37"/>
+        <ComboBox x:Name="cbMonth" HorizontalAlignment="Left" Margin="447,42,0,0" VerticalAlignment="Top" Width="65" FontSize="16" Height="33"/>
+        <ListView x:Name="lvList" HorizontalAlignment="Left" Height="404" Margin="35,108,0,0" VerticalAlignment="Top" Width="1310" FontSize="16">
+            <ListView.View>
+                <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <!-- Set any properties you want to set -->
+                            <Setter Property="Background" Value="LightBlue" />
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridView.ColumnHeaderContextMenu>
+                        <ContextMenu/>
+                    </GridView.ColumnHeaderContextMenu>
+                    <GridViewColumn Header="생산계획번호" Width="150"/>
+                    <GridViewColumn Header="품목" Width="300"/>
+                    <GridViewColumn Header="작업장" Width="300"/>
+                    <GridViewColumn Header="생산수량" Width="100"/>
+                    <GridViewColumn Header="시작일" Width="200"/>
+                    <GridViewColumn Header="종료일" Width="200"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="btnPlanQuery" Content="생산계획조회" HorizontalAlignment="Left" Margin="885,34,0,0" VerticalAlignment="Top" Width="120" FontSize="16" Height="45" Click="btnPlanQuery_Click"/>
+        <Button x:Name="btnDelete" Content="선택된 생산계획삭제" HorizontalAlignment="Left" Margin="1025,35,0,0" VerticalAlignment="Top" Width="172" FontSize="16" Height="45"/>
+        <Button x:Name="btnSummary" Content="생산실적조회" HorizontalAlignment="Left" Margin="1219,34,0,0" VerticalAlignment="Top" Width="120" FontSize="16" Height="45"/>
+        <Label Content="품목 : " HorizontalAlignment="Left" Margin="35,539,0,0" VerticalAlignment="Top" Width="72" FontSize="16" Height="37"/>
+        <ComboBox x:Name="cbItem" HorizontalAlignment="Left" Margin="112,539,0,0" VerticalAlignment="Top" Width="501" FontSize="16" Height="33"/>
+        <Label Content="작업장 : " HorizontalAlignment="Left" Margin="734,539,0,0" VerticalAlignment="Top" Width="86" FontSize="16" Height="37"/>
+        <ComboBox x:Name="cbWorkCenter" HorizontalAlignment="Left" Margin="825,539,0,0" VerticalAlignment="Top" Width="449" FontSize="16" Height="33"/>
+        <Label Content="수량 : " HorizontalAlignment="Left" Margin="35,603,0,0" VerticalAlignment="Top" Width="72" FontSize="16" Height="37"/>
+        <TextBox x:Name="txtQty" HorizontalAlignment="Left" Height="34" Margin="112,603,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="16"/>
+        <Label Content="생산시작일 : " HorizontalAlignment="Left" Margin="385,603,0,0" VerticalAlignment="Top" Width="128" FontSize="16" Height="37"/>
+        <DatePicker x:Name="dpSdate" HorizontalAlignment="Left" Margin="518,602,0,0" VerticalAlignment="Top" FontSize="16" Width="234" Height="35"/>
+        <Label Content="생산종료일 : " HorizontalAlignment="Left" Margin="907,603,0,0" VerticalAlignment="Top" Width="128" FontSize="16" Height="37"/>
+        <DatePicker x:Name="dpEdate" HorizontalAlignment="Left" Margin="1040,602,0,0" VerticalAlignment="Top" FontSize="16" Width="234" Height="35"/>
+        <Button x:Name="btnPlanQuery_Copy" Content="생산계획등록" HorizontalAlignment="Left" Margin="1077,667,0,0" VerticalAlignment="Top" Width="120" FontSize="16" Height="45"/>
+        <Button x:Name="btnDelete_Copy" Content="생산완료등록" HorizontalAlignment="Left" Margin="1225,667,0,0" VerticalAlignment="Top" Width="120" FontSize="16" Height="45"/>
+
+
+    </Grid>
+</Window>
