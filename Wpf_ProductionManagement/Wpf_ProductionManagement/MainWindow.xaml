@@ -23,17 +23,18 @@
                             <Setter Property="Background" Value="LightBlue" />
                             <Setter Property="Foreground" Value="Black" />
                             <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
                         </Style>
                     </GridView.ColumnHeaderContainerStyle>
                     <GridView.ColumnHeaderContextMenu>
                         <ContextMenu/>
                     </GridView.ColumnHeaderContextMenu>
-                    <GridViewColumn Header="생산계획번호" Width="150"/>
-                    <GridViewColumn Header="품목" Width="300"/>
-                    <GridViewColumn Header="작업장" Width="300"/>
-                    <GridViewColumn Header="생산수량" Width="100"/>
-                    <GridViewColumn Header="시작일" Width="200"/>
-                    <GridViewColumn Header="종료일" Width="200"/>
+                    <GridViewColumn Header="생산계획번호" Width="150"  DisplayMemberBinding="{Binding Path=pro_code}"/>
+                    <GridViewColumn Header="품목" Width="300" DisplayMemberBinding="{Binding Path=item}"/>
+                    <GridViewColumn Header="작업장" Width="300" DisplayMemberBinding="{Binding Path=center}"/>
+                    <GridViewColumn Header="생산수량" Width="100" DisplayMemberBinding="{Binding Path=qty}"/>
+                    <GridViewColumn Header="시작일" Width="200" DisplayMemberBinding="{Binding Path=sdate}"/>
+                    <GridViewColumn Header="종료일" Width="200" DisplayMemberBinding="{Binding Path=edate}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -47,11 +48,13 @@
         <Label Content="수량 : " HorizontalAlignment="Left" Margin="35,603,0,0" VerticalAlignment="Top" Width="72" FontSize="16" Height="37"/>
         <TextBox x:Name="txtQty" HorizontalAlignment="Left" Height="34" Margin="112,603,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="16"/>
         <Label Content="생산시작일 : " HorizontalAlignment="Left" Margin="385,603,0,0" VerticalAlignment="Top" Width="128" FontSize="16" Height="37"/>
-        <DatePicker x:Name="dpSdate" HorizontalAlignment="Left" Margin="518,602,0,0" VerticalAlignment="Top" FontSize="16" Width="234" Height="35"/>
+        <DatePicker x:Name="dtSdate" HorizontalAlignment="Left" Margin="518,602,0,0" VerticalAlignment="Top" FontSize="16" Width="234" Height="35"/>
         <Label Content="생산종료일 : " HorizontalAlignment="Left" Margin="907,603,0,0" VerticalAlignment="Top" Width="128" FontSize="16" Height="37"/>
-        <DatePicker x:Name="dpEdate" HorizontalAlignment="Left" Margin="1040,602,0,0" VerticalAlignment="Top" FontSize="16" Width="234" Height="35"/>
-        <Button x:Name="btnPlanQuery_Copy" Content="생산계획등록" HorizontalAlignment="Left" Margin="1077,667,0,0" VerticalAlignment="Top" Width="120" FontSize="16" Height="45"/>
+        <DatePicker x:Name="dtEdate" HorizontalAlignment="Left" Margin="1040,602,0,0" VerticalAlignment="Top" FontSize="16" Width="234" Height="35"/>
+        <Button x:Name="btnAdd" Content="생산계획등록" HorizontalAlignment="Left" Margin="1077,667,0,0" VerticalAlignment="Top" Width="120" FontSize="16" Height="45"/>
         <Button x:Name="btnDelete_Copy" Content="생산완료등록" HorizontalAlignment="Left" Margin="1225,667,0,0" VerticalAlignment="Top" Width="120" FontSize="16" Height="45"/>
+        <Label x:Name="lblProCode" Content="lblProCode" HorizontalAlignment="Left" Margin="613,42,0,0" VerticalAlignment="Top"/>
+        <StatusBar x:Name="statusStrip" HorizontalAlignment="Left" Height="28" Margin="0,702,0,0" VerticalAlignment="Top" Width="949" AlternationCount="-5"/>
 
 
     </Grid>

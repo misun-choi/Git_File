@@ -1,0 +1,12 @@
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\bin\Debug\InOutManagement.exe.config
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\bin\Debug\InOutManagement.exe
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\bin\Debug\InOutManagement.pdb
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\bin\Debug\Oracle.DataAccess.dll
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.csproj.AssemblyReference.cache
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.frmMain.resources
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.Properties.Resources.resources
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.csproj.GenerateResource.cache
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.csproj.CoreCompileInputs.cache
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.csproj.CopyComplete
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.exe
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.pdb
