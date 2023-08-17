@@ -20,7 +20,7 @@ namespace InOutManagement
             {
                 string szValue = szData.Replace(",", "");
                 Double data = Double.Parse(szValue);
-                szReturn = string.Format("{0:###,###,###,###,###,###}", data);
+                szReturn = string.Format("{0:###,###,###,###,###,##0}", data);
 
             }
             return szReturn;
@@ -85,6 +85,8 @@ namespace InOutManagement
             {
                 if (!sort)
                     f.SortMode = DataGridViewColumnSortMode.NotSortable;                                // sort 막기
+                else
+                    f.SortMode = DataGridViewColumnSortMode.Automatic;                                  // sort 하기
 
                 f.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;           //헤더텍스트 센터 정렬
                 f.HeaderCell.Style.Font = new Font("굴림", 12F, FontStyle.Bold, GraphicsUnit.Pixel);      // 폰트 사이트 및 크기 조정

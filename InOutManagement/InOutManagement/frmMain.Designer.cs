@@ -87,7 +87,7 @@ namespace InOutManagement
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnDelete.Location = new System.Drawing.Point(625, 53);
+            this.btnDelete.Location = new System.Drawing.Point(604, 53);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(99, 33);
             this.btnDelete.TabIndex = 5;
@@ -97,7 +97,7 @@ namespace InOutManagement
             // btnOutput
             // 
             this.btnOutput.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnOutput.Location = new System.Drawing.Point(510, 53);
+            this.btnOutput.Location = new System.Drawing.Point(489, 53);
             this.btnOutput.Name = "btnOutput";
             this.btnOutput.Size = new System.Drawing.Size(99, 33);
             this.btnOutput.TabIndex = 5;
@@ -107,7 +107,7 @@ namespace InOutManagement
             // btnInput
             // 
             this.btnInput.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnInput.Location = new System.Drawing.Point(396, 53);
+            this.btnInput.Location = new System.Drawing.Point(375, 53);
             this.btnInput.Name = "btnInput";
             this.btnInput.Size = new System.Drawing.Size(99, 33);
             this.btnInput.TabIndex = 5;
@@ -117,7 +117,7 @@ namespace InOutManagement
             // txtQty
             // 
             this.txtQty.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.txtQty.Location = new System.Drawing.Point(74, 50);
+            this.txtQty.Location = new System.Drawing.Point(104, 50);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(69, 22);
             this.txtQty.TabIndex = 4;
@@ -135,7 +135,7 @@ namespace InOutManagement
             // 
             this.cbItem.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.cbItem.FormattingEnabled = true;
-            this.cbItem.Location = new System.Drawing.Point(395, 15);
+            this.cbItem.Location = new System.Drawing.Point(376, 14);
             this.cbItem.Name = "cbItem";
             this.cbItem.Size = new System.Drawing.Size(327, 21);
             this.cbItem.TabIndex = 2;
@@ -153,17 +153,17 @@ namespace InOutManagement
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.Location = new System.Drawing.Point(786, 18);
+            this.label3.Location = new System.Drawing.Point(746, 17);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "날짜 : ";
+            this.label3.Text = "입출고날짜 : ";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(331, 18);
+            this.label2.Location = new System.Drawing.Point(312, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 0;
@@ -175,9 +175,9 @@ namespace InOutManagement
             this.label4.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label4.Location = new System.Drawing.Point(10, 53);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 13);
+            this.label4.Size = new System.Drawing.Size(88, 13);
             this.label4.TabIndex = 0;
-            this.label4.Text = "수량 : ";
+            this.label4.Text = "입출고 수량 : ";
             // 
             // label1
             // 
@@ -202,6 +202,7 @@ namespace InOutManagement
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvList.Size = new System.Drawing.Size(1079, 328);
             this.dgvList.TabIndex = 1;
+            this.dgvList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvList_CellFormatting);
             this.dgvList.CurrentCellChanged += new System.EventHandler(this.dgvList_CurrentCellChanged);
             // 
             // statusStrip

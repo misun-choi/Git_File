@@ -15,6 +15,7 @@ namespace InOutManagement
         DataManager dm = new DataManager();
         ComModules cm = new ComModules();
         Inouts ls = new Inouts();
+        public string g_sIn_qty;
 
         public frmMain()
         {
@@ -62,10 +63,10 @@ namespace InOutManagement
         #region SetGridHeader() : DataGridView 해더 초기화...
         private void SetGridHeader()
         {
-            cm.SetGridHeader(dgvList, false, Color.DarkGray, Color.Black);
+            cm.SetGridHeader(dgvList, true, Color.DarkGray, Color.Black);
 
             dgvList.Columns[0].HeaderText = "입출고번호";
-            dgvList.Columns[0].Width = 120;
+            dgvList.Columns[0].Width = 100;
             dgvList.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dgvList.Columns[1].HeaderText = "창고명";
@@ -81,7 +82,7 @@ namespace InOutManagement
             dgvList.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dgvList.Columns[4].HeaderText = "입고수량";
-            dgvList.Columns[4].Width = 80;
+            dgvList.Columns[4].Width = 90;
             dgvList.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             dgvList.Columns[5].HeaderText = "출고일자";
@@ -89,7 +90,7 @@ namespace InOutManagement
             dgvList.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dgvList.Columns[6].HeaderText = "출고수량";
-            dgvList.Columns[6].Width = 80;
+            dgvList.Columns[6].Width = 90;
             dgvList.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             dgvList.Columns[7].HeaderText = "남은수량";
@@ -133,6 +134,13 @@ namespace InOutManagement
             {
                 string sDateTime = dtDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
                 string sSql;
+                if (int.Parse(g_sIn_qty.Replace(",", "")) < int.Parse(txtQty.Text.Replace(",", "")))
+                {
+                    MessageBox.Show("입고수량보다 출고수량이 많습니다. 다시 확인하세요", "알림", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtQty.Focus();
+                    return;
+                }
+
                 if (MessageBox.Show(cbItem.Text + " " + txtQty .Text + "개를 출고 등록 하시겠습니까?", "알림", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     if (!InputChk())
@@ -218,6 +226,7 @@ namespace InOutManagement
                 lblInout_code.Text = inout.inout_code.ToString();
                 cbItem.Text = inout.item_name;
                 cbRack.Text = inout.rack_name;
+                g_sIn_qty = inout.in_qty;
             }
         }
 
@@ -227,5 +236,16 @@ namespace InOutManagement
             txtQty.SelectionStart = txtQty.TextLength;
             txtQty.SelectionLength = 0;
         }
+
+        #region dgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) : 남은수량이 0이면 row 색상을 빨간색으로 빠꾼다.
+        private void dgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvList.Rows[e.RowIndex].Cells[7].Value.ToString() == "0")
+            {
+                e.CellStyle.BackColor = Color.Red;
+                e.CellStyle.ForeColor = Color.White;
+            }
+        }
+        #endregion
     }
 }
