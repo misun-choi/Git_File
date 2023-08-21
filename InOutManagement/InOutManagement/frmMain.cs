@@ -14,8 +14,9 @@ namespace InOutManagement
     {
         DataManager dm = new DataManager();
         ComModules cm = new ComModules();
+
         Inouts ls = new Inouts();
-        public string g_sIn_qty;
+        public string g_sIn_qty, g_Inout_code;
 
         public frmMain()
         {
@@ -31,11 +32,25 @@ namespace InOutManagement
         public DataManager GetDm() => dm;
         public ComModules GetCm() => cm;
 
+        #region InitGetData() : 콤보 데이타 쿼리해 옴 (품목, 작업장콤보) ... 리스트의 해더 Setting...
+        private void InitGetData()
+        {
+            dm.SelComboData("Item", cbItem);                                      // 품목 콤보
+            dm.SelComboData("Rack", cbRack);                                      // 작업장 콤보            
+
+            InitForm();
+            dgvList.ClearSelection();
+        }
+        #endregion
+
         #region InitForm() => Form 초기화 후 창고입출고정보 Listing...
         private void InitForm()
         {
-            cbItem.SelectedIndex = -1;
-            cbRack.SelectedIndex = -1;
+            g_sIn_qty = string.Empty;
+            g_Inout_code = string.Empty;
+
+            cbItem.SelectedIndex = 0;
+            cbRack.SelectedIndex = 0;
             txtQty.Text = "";
             dtDate.Value = DateTime.Now;
 
@@ -43,32 +58,23 @@ namespace InOutManagement
             dgvList.ClearSelection();
             dgvList.DataSource = null;
 
-            dm.InOutList(dgvList);              // 창고입출고정보 Listing...
+            dm.InOutList(dgvList);                                                                     // 창고입출고정보 Listing...
 
-            SetGridHeader();
-            dgvList.AlternatingRowsDefaultCellStyle.BackColor = Color.LightPink;       // Row색상 번갈아 변경
-        }
-        #endregion
-
-        #region InitGetData() : 콤보 데이타 쿼리해 옴 (품목, 작업장콤보) ... 리스트의 해더 Setting...
-        private void InitGetData()
-        {
-            dm.SelComboData("Item", cbItem);                                       // 품목 콤보
-            dm.SelComboData("Rack", cbRack);                                      // 작업장 콤보            
-
-            InitForm();
+            SetGridHeader();                                                                           // DataGridView 해더 초기화...
+            cm.SetGridAlternatingRowColor(dgvList,  Color.LightPink);                      // Row색상 번갈아 변경
+            //SetImageInCell();
         }
         #endregion
 
         #region SetGridHeader() : DataGridView 해더 초기화...
         private void SetGridHeader()
         {
-            cm.SetGridHeader(dgvList, true, Color.DarkGray, Color.Black);
+            cm.SetGridHeader(dgvList, true, Color.DarkGray, Color.Black, Color.LightSkyBlue, Color.Black);
 
             dgvList.Columns[0].HeaderText = "입출고번호";
             dgvList.Columns[0].Width = 100;
             dgvList.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
+ 
             dgvList.Columns[1].HeaderText = "창고명";
             dgvList.Columns[1].Width = 200;
             dgvList.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -76,11 +82,11 @@ namespace InOutManagement
             dgvList.Columns[2].HeaderText = "품목";
             dgvList.Columns[2].Width = 200;
             dgvList.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
+ 
             dgvList.Columns[3].HeaderText = "입고일자";
             dgvList.Columns[3].Width = 115;
             dgvList.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
+ 
             dgvList.Columns[4].HeaderText = "입고수량";
             dgvList.Columns[4].Width = 90;
             dgvList.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -88,7 +94,7 @@ namespace InOutManagement
             dgvList.Columns[5].HeaderText = "출고일자";
             dgvList.Columns[5].Width = 115;
             dgvList.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
+ 
             dgvList.Columns[6].HeaderText = "출고수량";
             dgvList.Columns[6].Width = 90;
             dgvList.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -147,7 +153,7 @@ namespace InOutManagement
                         return;
 
                     sSql = String.Format("update T_INOUTS set out_qty = {0}, out_date = to_date('{1}','yyyy-mm-dd hh24:mi:ss')  where inout_code = {2} ",
-                                    txtQty.Text.Replace(",", ""), sDateTime, lblInout_code.Text);
+                                    txtQty.Text.Replace(",", ""), sDateTime, g_Inout_code);
 
                     if (dm.DataProcess(sSql))
                     {
@@ -165,7 +171,7 @@ namespace InOutManagement
                 string sSql;
                 if (MessageBox.Show(cbItem.Text + "을/를 삭제 하시겠습니까?", "알림", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    sSql = string.Format("delete from T_INOUTS where inout_code ={0}", lblInout_code.Text);
+                    sSql = string.Format("delete from T_INOUTS where inout_code ={0}", g_Inout_code);
                     if (dm.DataProcess(sSql))
                     {
                         InitForm();
@@ -179,7 +185,16 @@ namespace InOutManagement
             // 생산계획 등록 버튼 클릭시 처리....
             btnAnalysis.Click += (sender, e) =>
             {
-                //
+                string item, rack;
+                frmAnalysis frmSub = new frmAnalysis();
+                frmSub.Location = new Point(this.Location.X +btnAnalysis.Left, btnAnalysis.Height + this.Location.Y +dgvList .Top);
+                frmSub.StartPosition = FormStartPosition.Manual;
+                if (cbItem.SelectedValue.ToString() == "All")   item = "";
+                else item = cbItem.SelectedValue.ToString();
+                if (cbRack.SelectedValue.ToString() == "All")   rack = "";
+                else rack = cbRack.SelectedValue.ToString();
+                frmSub.SetParent(this, item, rack);
+                frmSub.ShowDialog();
             };
             #endregion 
         }
@@ -223,7 +238,8 @@ namespace InOutManagement
             {
                 // 그리드의 셀이 선택되면 텍스트박스에 글자 지정
                 Inouts inout = dgvList.CurrentRow.DataBoundItem as Inouts;
-                lblInout_code.Text = inout.inout_code.ToString();
+
+                g_Inout_code = inout.inout_code.ToString();
                 cbItem.Text = inout.item_name;
                 cbRack.Text = inout.rack_name;
                 g_sIn_qty = inout.in_qty;
@@ -240,12 +256,58 @@ namespace InOutManagement
         #region dgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) : 남은수량이 0이면 row 색상을 빨간색으로 빠꾼다.
         private void dgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvList.Rows[e.RowIndex].Cells[7].Value.ToString() == "0")
+            if (dgvList.Rows[e.RowIndex].Cells["remain"].Value.ToString() == "0")
             {
                 e.CellStyle.BackColor = Color.Red;
                 e.CellStyle.ForeColor = Color.White;
             }
         }
         #endregion
+
+        //텍스트박스에서 숫자와 백스페이스 키만 처리 되게..
+        private void txtQty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            cm.Key_Press(sender, e);
+        }
+
+        // Row Header에 Numbering...
+        private void dgvList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Image _image = Properties.Resources.fileImg2;
+            
+            using (SolidBrush b = new SolidBrush(dgvList.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                StringFormat sf = new StringFormat();
+                sf.Alignment = StringAlignment.Center;
+                e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 11, e.RowBounds.Location.Y + 4, sf);
+             // PointF ulCorner = new PointF(100.0F, 100.0F);
+             // e.Graphics.DrawImage(_image, ulCorner);
+            }
+        }
+
+        // Cell에 이미지 넣기
+        private void SetImageInCell()
+        {
+            Image _image = Properties.Resources.fileImg2;
+            //Icon treeIcon = new Icon(this.GetType(), "tree.ico");
+            DataGridViewImageColumn iconColumn = new DataGridViewImageColumn();
+            iconColumn.Image = _image;
+            iconColumn.Name = "I";
+            iconColumn.HeaderText = "";
+            iconColumn.Width = 20;
+            dgvList.Columns.Insert(0, iconColumn);
+        }
+        // DataGridView Header Sort 처리...
+        private void dgvList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewColumn column = dgvList.Columns[e.ColumnIndex];
+            string columnName = column.Name;
+            SortOrder sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending
+                                      ? SortOrder.Descending
+                                      : SortOrder.Ascending;
+            dm.Inouts.Sort(new SortingProcess(columnName, sortOrder));
+            dgvList.Refresh();
+            column.HeaderCell.SortGlyphDirection = sortOrder;
+        }
     }
 }

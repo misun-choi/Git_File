@@ -10,3 +10,4 @@ C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutMana
 C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.csproj.CopyComplete
 C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.exe
 C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.pdb
+C:\Users\somoj\OneDrive\바탕 화면\c#_Test\Git_File\InOutManagement\InOutManagement\obj\Debug\InOutManagement.frmAnalysis.resources

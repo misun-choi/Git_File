@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,8 @@ namespace InOutManagement
         public static OracleConnection m_oracleConn;
         ComModules cm = new ComModules();
         private BindingList<object> itemList = new BindingList<object>();
-        private BindingList<object> rackrList = new BindingList<object>();        
+        private BindingList<object> rackrList = new BindingList<object>();
+        public List<Inouts> Inouts = new List<Inouts>();
 
         #region  initDB() : DB Connection
         public static bool initDB()
@@ -50,6 +52,7 @@ namespace InOutManagement
 
                     while (oracleDR != null && oracleDR.Read())
                         itemList.Add(new { Text = oracleDR["ITEM_NAME"].ToString(), Value = oracleDR["ITEM_CODE"].ToString() });
+                    itemList.Insert(0, new { Text = "전체", Value = "All" });
                     cb.DataSource = itemList;
                 }
                 else                        // 작업장 쿼리
@@ -59,6 +62,7 @@ namespace InOutManagement
 
                     while (oracleDR != null && oracleDR.Read())
                         rackrList.Add(new { Text = oracleDR["RACK_NAME"].ToString(), Value = oracleDR["RACK_CODE"].ToString() });
+                    rackrList.Insert(0, new { Text = "전체", Value = "All" });
                     cb.DataSource = rackrList;
                 }
                 
@@ -95,7 +99,7 @@ namespace InOutManagement
         #region InOutList(DataGridView lv) : 테이블 T_INOUTS(창고 입출고)에 있는 정보를 DataGridView에 Listing...
         public void InOutList(DataGridView lv)
         {
-            List<Inouts> Inouts = new List<Inouts>();
+            Inouts.Clear();
             Inouts inout;
             try
             {
@@ -106,6 +110,7 @@ namespace InOutManagement
                                         " decode(a.in_qty,null,0,a.in_qty) - decode(a.out_qty,null,0,a.out_qty) remain" +
                                 "  from T_INOUTS a " +
                                 "order by a.inout_code";
+
                 OracleDataReader oracleDR;
                 OracleCommand oracleCmd = new OracleCommand(sSql, m_oracleConn);
                 oracleDR = oracleCmd.ExecuteReader();
@@ -126,6 +131,37 @@ namespace InOutManagement
                 }
                 lv.DataSource = Inouts;
                 oracleDR.Close();                
+            }
+            catch (OracleException e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion 
+
+        #region AnalysisList(DataGridView lv) : 테이블 T_INOUTS(창고 입출고)에 있는 정보를 DataGridView에 summary하여 Listing...
+        public void AnalysisList(DataGridView lv, string item, string rack)
+        {
+            try
+            {
+                string sSql = string.Format(" select nvl(sum(a.in_qty),0) in_qty, nvl(sum(a.out_qty),0) out_qty " +
+                                                    "  from t_inouts a " +
+                                                    " where a.item_code like '%{0}' " +
+                                                    "    and a.rack_code like '%{1}'", item, rack);
+
+                OracleDataReader oracleDR;
+                OracleCommand oracleCmd = new OracleCommand(sSql, m_oracleConn);
+                oracleDR = oracleCmd.ExecuteReader();                
+                if  (oracleDR != null)
+                {
+                    oracleDR.Read();
+                    int remain = int.Parse(oracleDR["in_qty"].ToString()) - int.Parse(oracleDR["out_qty"].ToString());
+                    lv.Rows.Add(cm.ToComma(oracleDR["in_qty"].ToString()),
+                                    cm.ToComma(oracleDR["out_qty"].ToString()),
+                                    cm.ToComma(remain.ToString()));                   
+                }
+               
+                oracleDR.Close();
             }
             catch (OracleException e)
             {
